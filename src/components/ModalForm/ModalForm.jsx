@@ -93,7 +93,7 @@ const ModalForm = props => {
                 onChange={handleChange} 
                 placeholder='Title' 
                 type='text' 
-                name='name'
+                name='title'
                 autoFocus
                 />
                 <input 
