@@ -1,11 +1,10 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { PieChart, Pie, Sector, Cell, ResponsiveContainer } from 'recharts';
+//
+import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
 //styles
 import "./PieChart.css";
 //components
 import PieLabel from '../PieLabel/PieLabel';
 //contexts
-import { TransactionsContext } from '../../Contexts/AllContexts';
 import useChartData from '../customHooks/useChartData';
 
 

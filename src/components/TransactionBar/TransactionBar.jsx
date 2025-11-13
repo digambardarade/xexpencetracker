@@ -49,7 +49,7 @@ TransactionBar.propTypes = {
     return (
         <div className='TransactionBar'>
             <span className='transactionIcon'>
-                <img src={selectIcon()}/>
+                <img src={selectIcon()} alt="" />
             </span>
             <span className='TransactionBarBody'>
                 <span className='TransactionText'>

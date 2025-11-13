@@ -1,23 +1,19 @@
-import React, { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 //contexts
 import { TransactionsContext } from '../../Contexts/AllContexts';
 
 const useChartData = initialData => {
     //context
-    const [transactionData, setTransactionData] = useContext(TransactionsContext);
+    const [transactionData] = useContext(TransactionsContext);
     //states
     const [chartData, setChartData] = useState(initialData);
     //everytime transactionData updates
-    useEffect(()=> {
+    useEffect(() => {
         setChartData([
             { name: 'Entertainment', value: 0 },
             { name: 'Food', value: 0 },
             { name: 'Travel', value: 0 },
         ]);
-        calculateCategories();
-    }, [transactionData])
-    //functions
-    const calculateCategories = () => {
         let foodTotal = 0, entertainmentTotal = 0, travelTotal = 0;
         transactionData.forEach(item => {
             if(item.category === "food"){
@@ -33,7 +29,7 @@ const useChartData = initialData => {
                 setChartData(pre=>[pre[0], pre[1], {name: "Travel", value: travelTotal}])
             }
         });
-    }
+    }, [transactionData]);
 
     return chartData;
 }

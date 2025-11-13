@@ -11,7 +11,7 @@ const Button = props => {
         onClick={clickFunction}
         type={buttonType}
         >
-            {text || <img src={icon} />}
+            {text || <img src={icon} alt="" />}
         </button>
     );
 };
