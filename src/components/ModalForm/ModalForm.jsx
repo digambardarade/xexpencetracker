@@ -17,7 +17,7 @@ const ModalForm = props => {
     // (handled in useEffect below)
     //states
     const [formData, setFormData] = useState({
-        name: "",
+        title: "",
         price: "",
         date: new Date().toISOString().split("T")[0], //gives date in yyyy-mm-dd format
         category: "",
@@ -27,9 +27,9 @@ const ModalForm = props => {
         useEffect(() => {
             const updateFormDataWithExistingData = () => {
                 console.log(existingData);
-                const {name, date, amount, category} = existingData;
+                const {title, date, amount, category, name} = existingData;
                 setFormData({
-                    name: name,
+                    title: title || name || "",
                     price: amount,
                     date: date,
                     category: category
@@ -38,8 +38,13 @@ const ModalForm = props => {
             if (existingData) updateFormDataWithExistingData();
         }, [existingData]);
     const handleChange = evt => {
-        const key = evt.target.name, value = evt.target.value;
-        setFormData({...formData, [key]: value });
+        const key = evt.target.name;
+        let value = evt.target.value;
+        // Ensure price is always a number
+        if (key === 'price') {
+            value = value === '' ? '' : Number(value);
+        }
+        setFormData({ ...formData, [key]: value });
     }
     const handleSubmit = evt => {
         evt.preventDefault();
@@ -88,7 +93,7 @@ const ModalForm = props => {
             <div className='formInputsDiv'>
                 <input 
                 required
-                value={formData.name}
+                value={formData.title}
                 className="formInput" 
                 onChange={handleChange} 
                 placeholder='Title' 
