@@ -123,7 +123,7 @@ const ModalForm = props => {
                 onChange={handleChange} 
                 placeholder='dd/mm/yyyy' 
                 type='date' 
-                name='date'
+                name='title'
                 />
             </div>
         )
@@ -136,7 +136,7 @@ const ModalForm = props => {
                 onChange={e=> setBalanceFormData({income: +e.target.value})} 
                 placeholder='Income Amount' 
                 type='number' 
-                name='income' 
+                name='title' 
                 value={balanceFormData.income}
                 autoFocus
                 required
