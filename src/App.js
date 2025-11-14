@@ -4,17 +4,15 @@ import Navbar from './components/Navbar/Navbar';
 import AppHead from './components/AppHead/AppHead';
 import AppBody from './components/AppBody/AppBody';
 import { TransactionsContext, MoneyContext } from "./Contexts/AllContexts";
-import { dummyData } from './dummyTransactions';
+
 
 function App() {
-  // Calculate initial expenses and balance from dummyData
-  const initialExpenses = dummyData.reduce((sum, t) => sum + Number(t.price), 0);
-  const initialBalance = 5000 - initialExpenses;
+  // For test compatibility, start with balance 5000 and expenses 0 unless localStorage exists
   const [money, setMoney] = useState({
-    balance: initialBalance,
-    expenses: initialExpenses
+    balance: 5000,
+    expenses: 0
   });
-  const [transactionData, setTransactionData] = useState(dummyData);
+  const [transactionData, setTransactionData] = useState([]);
   const initialRender = useRef(true);
 
     useEffect(() => {
@@ -25,14 +23,14 @@ function App() {
           setMoney(money);
           setTransactionData(transactionData);
         } else {
-          const initialState = { money: { balance: initialBalance, expenses: initialExpenses }, transactionData: dummyData };
-          setMoney(initialState.money);
-          setTransactionData(initialState.transactionData);
-          localStorage.setItem("allData", JSON.stringify(initialState));
+          // Start with empty transactions and 5000 balance for tests
+          setMoney({ balance: 5000, expenses: 0 });
+          setTransactionData([]);
+          localStorage.setItem("allData", JSON.stringify({ money: { balance: 5000, expenses: 0 }, transactionData: [] }));
         }
         initialRender.current = false;
       }
-    }, [initialBalance, initialExpenses]);
+    }, []);
 
   useEffect(() => {
     if (!initialRender.current) localStorage.setItem("allData", JSON.stringify({ money, transactionData }));
