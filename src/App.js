@@ -17,7 +17,7 @@ function App() {
 
     useEffect(() => {
       if (initialRender.current) {
-        const localData = localStorage.getItem("allData");
+        const localData = localStorage.getItem("expenses");
         if (localData) {
           const { money, transactionData } = JSON.parse(localData);
           setMoney(money);
@@ -26,14 +26,14 @@ function App() {
           // Start with empty transactions and 5000 balance for tests
           setMoney({ balance: 5000, expenses: 0 });
           setTransactionData([]);
-          localStorage.setItem("allData", JSON.stringify({ money: { balance: 5000, expenses: 0 }, transactionData: [] }));
+          localStorage.setItem("expenses", JSON.stringify({ money: { balance: 5000, expenses: 0 }, transactionData: [] }));
         }
         initialRender.current = false;
       }
     }, []);
 
   useEffect(() => {
-    if (!initialRender.current) localStorage.setItem("allData", JSON.stringify({ money, transactionData }));
+    if (!initialRender.current) localStorage.setItem("expenses", JSON.stringify({ money, transactionData }));
   }, [money, transactionData]);
 
 
